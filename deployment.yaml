@@ -1,0 +1,55 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: backend
+  labels:
+    cloud.googleapis.com/location: southamerica-east1
+  annotations:
+    run.googleapis.com/ingress: all
+    run.googleapis.com/minScale: '0'
+    run.googleapis.com/max-surge: '0'
+spec:
+  template:
+    metadata:
+      labels:
+        run.googleapis.com/startupProbeType: Default
+      annotations:
+        run.googleapis.com/execution-environment: gen2
+        autoscaling.knative.dev/maxScale: '1'
+        run.googleapis.com/startup-cpu-boost: 'true'
+    spec:     
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: $PROJECT_NUMBER-compute@developer.gserviceaccount.com
+      containers:
+      - name: $_SERVICE
+        image: southamerica-east1-docker.pkg.dev/oficina-facil-prd/fiap-docker/backend:latest
+        ports:
+        - name: http1
+          containerPort: 3000
+        env:
+          - name: DATABASE_URL
+            value: mongodb://root:mongo2023@localhost:27017
+          - name: MERCADOPAGO_URL
+            value: https://api.mercadopago.com/123
+          - name: MERCADOPAGO_USERID
+            value: 8496
+          - name: MERCADOPAGO_TOKEN
+            value: TEST-2
+          - name: MERCADOPAGO_POS
+            value: SU
+          - name: MERCADOPAGO_WEBHOOK_URL
+            value: http:/br     
+        resources:
+          limits:
+            cpu: '1000m'
+            memory: '1Gi'
+        startupProbe:
+          timeoutSeconds: 240
+          periodSeconds: 240
+          failureThreshold: 1
+          tcpSocket:
+            port: 8080
+  traffic:
+  - percent: 100
+    latestRevision: true
