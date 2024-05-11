@@ -81,7 +81,7 @@ jobs:
       - name: 'Replace'
         run: 'gcloud run services replace deployment.yaml'
       - name: 'Policies'
-        run: 'gcloud run services set-iam-policy backend policy.yaml --region southamerica-east1'
+        run: 'gcloud run services set-iam-policy backend policy.yaml --quiet --region southamerica-east1'
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
