@@ -83,8 +83,8 @@ jobs:
           region: ${{ env.REGION }}
           # NOTE: If required, update to the appropriate source folder
           source: ./
-
-
+      - name: 'Use gcloud CLI'
+        run: 'gcloud run services replace deployment.yaml'
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}

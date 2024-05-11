@@ -20,6 +20,9 @@ router.post('/v1',
         #swagger.description = 'Cria um novo cliente a partir das informações básicas'
         #swagger.operationId = 'postcliente'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]        
         #swagger.tags = ['Cliente']
         #swagger.parameters['body'] = { 
                 in: 'body', 
@@ -51,6 +54,9 @@ router.put('/v1/:cpf',
         #swagger.description = 'Atualiza os dados de um cliente pelo CPF'
         #swagger.operationId = 'postclientecpf'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]            
         #swagger.tags = ['Cliente']
         #swagger.parameters['body'] = { 
                 in: 'body', 
@@ -80,6 +86,9 @@ router.put('/v1/:cpf',
         #swagger.description = 'Busca os dados de clientes pelo CPF'
         #swagger.operationId = 'getclientecpf'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]            
         #swagger.tags = ['Cliente']
     */        
 
@@ -106,6 +115,9 @@ router.post('/v1/autenticacao',
       #swagger.description = 'Autentica um usuário através do CPF e email'
       #swagger.operationId = 'postclienteautenticacao'
       #swagger.deprecated = false
+      #swagger.security = [{
+        "JWT": []
+      }]          
       #swagger.tags = ['Cliente']
       #swagger.parameters['body'] = { 
               in: 'body', 
@@ -123,7 +135,6 @@ router.post('/v1/autenticacao',
 
   controller.autentica(request, next).then()
 });
-
 
 router.get('/v1',
   (request: Request, _response: Response, next: NextFunction) => {

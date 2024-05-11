@@ -14,7 +14,8 @@ import {
 import {
     post_pedido,
     put_pedido,
-    post_webhook_pedido
+    post_webhook_pedido,
+    put_pedido_status
 
 } from 'domains/pedido/adapter/driver/rest/swagger/pedido.swagger'
 
@@ -54,6 +55,7 @@ export const swagger = {
         post_produto,
         put_produto,
         post_pedido,
+        put_pedido_status,
         post_webhook_pedido,
         put_pedido,
         post_webhook_mercadopago
@@ -65,5 +67,9 @@ export const swagger = {
           name: 'Authorization', 
           description: 'JWT Access Token - Incluir o Bearer'
         }
-      }    
+    },
+    "x-google-backend": {
+        "address": "https://backend-koxvlyfy2a-rj.a.run.app",
+        "jwt_audience": "https://backend-koxvlyfy2a-rj.a.run.app"
+    },        
 }

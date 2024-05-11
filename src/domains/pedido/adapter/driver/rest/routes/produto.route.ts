@@ -21,6 +21,9 @@ router.post('/v1',
         #swagger.description = 'Cria um novo produto a partir das informações básicas'
         #swagger.operationId = 'postproduto'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]        
         #swagger.tags = ['Produto']
         #swagger.parameters['body'] = { 
                 in: 'body', 
@@ -48,8 +51,11 @@ router.put('/v1/:codigo',
         #swagger.auto = true
         #swagger.summary = 'Atualiza um produto'
         #swagger.description = 'Atualiza os dados de um produto pelo codigo'
-        #swagger.operationId = 'postproduto'
+        #swagger.operationId = 'putproduto'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]        
         #swagger.tags = ['Produto']
         #swagger.parameters['body'] = { 
                 in: 'body', 
@@ -75,6 +81,9 @@ router.delete('/v1/:codigo',
         #swagger.description = 'Deleta os dados de um produto pelo codigo'
         #swagger.operationId = 'deleteproduto'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]        
         #swagger.tags = ['Produto']
     */    
 
@@ -94,8 +103,11 @@ router.get('/v1',
       #swagger.auto = true
       #swagger.summary = 'busca produtos por categoria'
       #swagger.description = 'busca produtos por categoria'
-      #swagger.operationId = 'getProduto'
+      #swagger.operationId = 'getproduto'
       #swagger.deprecated = false
+      #swagger.security = [{
+        "JWT": []
+      }]      
       #swagger.tags = ['Produto']
       #swagger.parameters['categoria'] = { 
         in: 'query',

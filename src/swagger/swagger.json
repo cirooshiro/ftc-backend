@@ -39,12 +39,23 @@
   "paths": {
     "/api/health-check/v1": {
       "get": {
-        "description": "",
+        "tags": [
+          "Pedido"
+        ],
+        "summary": "Health Check da API",
+        "description": "Health Check da API",
+        "operationId": "gethealthcheck",
         "responses": {
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "deprecated": false
       }
     },
     "/api/clientes/v1": {
@@ -69,6 +80,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       },
       "get": {
@@ -119,6 +135,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       },
       "get": {
@@ -141,6 +162,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     },
@@ -166,6 +192,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     },
@@ -191,6 +222,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       },
       "get": {
@@ -199,12 +235,17 @@
         ],
         "summary": "lista todos os pedidos",
         "description": "lista todos os pedidos",
-        "operationId": "getPedido",
+        "operationId": "getpedido",
         "responses": {
           "default": {
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     },
@@ -215,7 +256,7 @@
         ],
         "summary": "Informa uma evento para o pedido",
         "description": "Informa um evento para o pedido",
-        "operationId": "postwebhookpedido",
+        "operationId": "postpedidowebhook",
         "parameters": [
           {
             "name": "body",
@@ -230,6 +271,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     },
@@ -261,6 +307,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     },
@@ -271,7 +322,7 @@
         ],
         "summary": "consulta status do pedido",
         "description": "Consulta o status do pedido",
-        "operationId": "putpedido",
+        "operationId": "getpedidostatus",
         "parameters": [
           {
             "name": "codigoPedido",
@@ -285,6 +336,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       },
       "put": {
@@ -293,7 +349,7 @@
         ],
         "summary": "Atualiza um pedido",
         "description": "Atualiza os dados de um pedido pelo codigo",
-        "operationId": "putpedido",
+        "operationId": "putpedidostatus",
         "parameters": [
           {
             "name": "codigoPedido",
@@ -314,6 +370,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     },
@@ -324,7 +385,7 @@
         ],
         "summary": "Faz o checkout de um pedido",
         "description": "Faz o checkout de um pedido com a forma de pagamento PIX",
-        "operationId": "putpedido",
+        "operationId": "putpedidocheckoutpix",
         "parameters": [
           {
             "name": "codigoPedido",
@@ -338,6 +399,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     },
@@ -363,6 +429,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       },
       "get": {
@@ -371,7 +442,7 @@
         ],
         "summary": "busca produtos por categoria",
         "description": "busca produtos por categoria",
-        "operationId": "getProduto",
+        "operationId": "getproduto",
         "parameters": [
           {
             "name": "categoria",
@@ -385,6 +456,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     },
@@ -395,7 +471,7 @@
         ],
         "summary": "Atualiza um produto",
         "description": "Atualiza os dados de um produto pelo codigo",
-        "operationId": "postproduto",
+        "operationId": "putproduto",
         "parameters": [
           {
             "name": "codigo",
@@ -416,6 +492,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       },
       "delete": {
@@ -438,6 +519,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     },
@@ -463,6 +549,11 @@
             "description": ""
           }
         },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "deprecated": false
       }
     }
@@ -621,6 +712,18 @@
         "itens"
       ]
     },
+    "put_pedido_status": {
+      "type": "object",
+      "properties": {
+        "statusPedido": {
+          "type": "string",
+          "example": "Em Preparação"
+        }
+      },
+      "required": [
+        "statusPedido"
+      ]
+    },
     "post_webhook_pedido": {
       "type": "object",
       "properties": {
@@ -693,5 +796,9 @@
         "id"
       ]
     }
+  },
+  "x-google-backend": {
+    "address": "https://backend-koxvlyfy2a-rj.a.run.app",
+    "jwt_audience": "https://backend-koxvlyfy2a-rj.a.run.app"
   }
 }

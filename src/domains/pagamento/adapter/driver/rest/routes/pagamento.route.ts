@@ -19,6 +19,9 @@ router.post('/v1/webhook/mercadopago',
         #swagger.description = 'Recebe os eventos do parceiro e envia para o domínio de pedidos'
         #swagger.operationId = 'postWebhookMercadopago'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]            
         #swagger.tags = ['Pagamento']
         #swagger.parameters['body'] = { 
                 in: 'body', 

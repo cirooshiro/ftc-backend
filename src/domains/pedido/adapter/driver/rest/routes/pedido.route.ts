@@ -10,6 +10,7 @@ import { ProdutoUseCases } from 'domains/pedido/core/applications/usecases/produ
 import { PagamentoUseCases } from 'domains/pagamento/core/applications/usecases/pagamento.usecases';
 import { PagamentoDatabase } from 'domains/pagamento/adapter/driven/infra/database/pagamento.database';
 import { PagamentoExternal } from 'domains/pagamento/adapter/driven/infra/external/pagamento.external';
+import { Identity } from 'domains/cliente/adapter/driven/infra/identity/identity';
 
 const router = Router();
 
@@ -25,6 +26,9 @@ router.post('/v1',
         #swagger.description = 'Cria um novo pedido'
         #swagger.operationId = 'postpedido'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]            
         #swagger.tags = ['Pedido']
         #swagger.parameters['body'] = {
                 in: 'body',
@@ -34,7 +38,7 @@ router.post('/v1',
 
     const service = new PedidoUseCases(
       new PedidoDatabase(), 
-      new ClienteUseCases(new ClienteDatabase()), 
+      new ClienteUseCases(new ClienteDatabase(), new Identity()), 
       new ProdutoUseCases(new ProdutoDatabase()),
       new PagamentoUseCases(
         new PagamentoDatabase(), 
@@ -56,8 +60,11 @@ router.post('/v1',
         #swagger.auto = true
         #swagger.summary = 'Informa uma evento para o pedido'
         #swagger.description = 'Informa um evento para o pedido'
-        #swagger.operationId = 'postwebhookpedido'
+        #swagger.operationId = 'postpedidowebhook'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]            
         #swagger.tags = ['Pedido']
         #swagger.parameters['body'] = {
                 in: 'body',
@@ -67,7 +74,7 @@ router.post('/v1',
 
     const service = new PedidoUseCases(
       new PedidoDatabase(), 
-      new ClienteUseCases(new ClienteDatabase()), 
+      new ClienteUseCases(new ClienteDatabase(), new Identity()), 
       new ProdutoUseCases(new ProdutoDatabase()),
       new PagamentoUseCases(
         new PagamentoDatabase(), 
@@ -92,6 +99,9 @@ body('itens').notEmpty().isArray(),
         #swagger.description = 'Atualiza os dados de um pedido pelo codigo'
         #swagger.operationId = 'putpedido'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]            
         #swagger.tags = ['Pedido']
         #swagger.parameters['body'] = { 
                 in: 'body', 
@@ -101,7 +111,7 @@ body('itens').notEmpty().isArray(),
 
     const service = new PedidoUseCases(
       new PedidoDatabase(), 
-      new ClienteUseCases(new ClienteDatabase()), 
+      new ClienteUseCases(new ClienteDatabase(), new Identity()), 
       new ProdutoUseCases(new ProdutoDatabase()),
       new PagamentoUseCases(
         new PagamentoDatabase(), 
@@ -122,14 +132,17 @@ body('itens').notEmpty().isArray(),
         #swagger.auto = true
         #swagger.summary = 'consulta status do pedido'
         #swagger.description = 'Consulta o status do pedido'
-        #swagger.operationId = 'putpedido'
+        #swagger.operationId = 'getpedidostatus'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]            
         #swagger.tags = ['Pedido']
     */   
 
     const service = new PedidoUseCases(
       new PedidoDatabase(), 
-      new ClienteUseCases(new ClienteDatabase()), 
+      new ClienteUseCases(new ClienteDatabase(), new Identity()), 
       new ProdutoUseCases(new ProdutoDatabase()),
       new PagamentoUseCases(
         new PagamentoDatabase(), 
@@ -153,8 +166,11 @@ body('itens').notEmpty().isArray(),
           #swagger.auto = true
           #swagger.summary = 'Atualiza um pedido'
           #swagger.description = 'Atualiza os dados de um pedido pelo codigo'
-          #swagger.operationId = 'putpedido'
+          #swagger.operationId = 'putpedidostatus'
           #swagger.deprecated = false
+          #swagger.security = [{
+            "JWT": []
+          }]              
           #swagger.tags = ['Pedido']
           #swagger.parameters['body'] = { 
                   in: 'body', 
@@ -164,7 +180,7 @@ body('itens').notEmpty().isArray(),
   
       const service = new PedidoUseCases(
         new PedidoDatabase(), 
-        new ClienteUseCases(new ClienteDatabase()), 
+        new ClienteUseCases(new ClienteDatabase(), new Identity()), 
         new ProdutoUseCases(new ProdutoDatabase()),
         new PagamentoUseCases(
           new PagamentoDatabase(), 
@@ -184,14 +200,17 @@ router.get('/v1',
       #swagger.auto = true
       #swagger.summary = 'lista todos os pedidos'
       #swagger.description = 'lista todos os pedidos'
-      #swagger.operationId = 'getPedido'
+      #swagger.operationId = 'getpedido'
       #swagger.deprecated = false
+      #swagger.security = [{
+        "JWT": []
+      }]          
       #swagger.tags = ['Pedido']
   */        
 
   const service = new PedidoUseCases(
     new PedidoDatabase(), 
-    new ClienteUseCases(new ClienteDatabase()), 
+    new ClienteUseCases(new ClienteDatabase(), new Identity()), 
     new ProdutoUseCases(new ProdutoDatabase()),
     new PagamentoUseCases(
       new PagamentoDatabase(), 
@@ -212,14 +231,17 @@ router.put('/v1/:codigoPedido/checkout/pix',
         #swagger.auto = true
         #swagger.summary = 'Faz o checkout de um pedido'
         #swagger.description = 'Faz o checkout de um pedido com a forma de pagamento PIX'
-        #swagger.operationId = 'putpedido'
+        #swagger.operationId = 'putpedidocheckoutpix'
         #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]            
         #swagger.tags = ['Pedido']
     */ 
 
     const service = new PedidoUseCases(
       new PedidoDatabase(), 
-      new ClienteUseCases(new ClienteDatabase()), 
+      new ClienteUseCases(new ClienteDatabase(), new Identity()), 
       new ProdutoUseCases(new ProdutoDatabase()),
       new PagamentoUseCases(
         new PagamentoDatabase(), 
