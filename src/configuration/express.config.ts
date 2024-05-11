@@ -8,10 +8,12 @@ import {errorHandler } from "domains/suporte/infra/error.handler"
 
 import swaggerUi from "swagger-ui-express"
 import swaggerDocument from "../swagger/swagger.json"
+import cors from 'cors'
 
 
 const ExpressConfig = (): Application => {
   const app = express()
+  app.use(cors())
   app.use(compression())
   app.use(express.urlencoded({ extended: true }))
   app.use(express.json())
