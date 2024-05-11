@@ -33,7 +33,7 @@ spec:
           - name: MERCADOPAGO_URL
             value: https://api.mercadopago.com/
           - name: MERCADOPAGO_USERID
-            value: 84967632
+            value: "84967632"
           - name: MERCADOPAGO_TOKEN
             value: TEST-2407420594039251-030222-bec9539a6ba5cae720b4f6d07ad3bd7a-84967632
           - name: MERCADOPAGO_POS
