@@ -3,13 +3,14 @@ import { ClienteVersao } from "domains/cliente/core/entities/cliente.versao";
 import admin from "firebase-admin"
 import { Auth, CreateRequest, UserRecord } from "firebase-admin/auth";
 import jwt from 'jsonwebtoken'
-import fs from 'fs'
 
 export class Identity {
     app: admin.app.App;
 
     constructor() {
-        this.app = admin.apps[0] || admin.initializeApp()
+        this.app = admin.apps[0] || admin.initializeApp({
+            serviceAccountId: '197343799268-compute@developer.gserviceaccount.com',
+          })
     }
 
     getIdentity(): Auth {
