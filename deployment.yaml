@@ -23,7 +23,7 @@ spec:
       serviceAccountName: 197343799268-compute@developer.gserviceaccount.com
       containers:
       - name: backend
-        image: southamerica-east1-docker.pkg.dev/oficina-facil-prd/fiap-docker/backend:latest
+        image: southamerica-east1-docker.pkg.dev/oficina-facil-prd/fiap/backend:latest
         ports:
         - name: http1
           containerPort: 3000
