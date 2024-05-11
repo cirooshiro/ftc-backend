@@ -77,7 +77,7 @@ jobs:
 
       - name: Deploy to Cloud Run
         id: deploy
-        run: 'gcloud run deploy service backend --quiet --region southamerica-east1 --platform managed --region southamerica-east1 --port 31300 --source ./ --project oficina-facil-prd --format json'
+        run: 'gcloud run deploy backend --quiet --region southamerica-east1 --platform managed --region southamerica-east1 --port 31300 --source ./ --project oficina-facil-prd --format json'
       - name: 'Replace'
         run: 'gcloud run services replace deployment.yaml'
       - name: 'Policies'
