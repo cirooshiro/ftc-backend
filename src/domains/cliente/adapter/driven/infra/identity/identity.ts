@@ -37,6 +37,9 @@ export class Identity {
 
     async verifyIdToken(token: string): Promise<Cliente>  {
 
+        console.warn('TOKEN', token)
+        console.warn('TOKEN_PRIVATE_KEY', process.env.TOKEN_PRIVATE_KEY)
+
         const verified: jwt.JwtPayload = (
         jwt.verify(
             token, 
