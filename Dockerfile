@@ -6,8 +6,7 @@ COPY tsconfig.json .
 COPY src ./src
 RUN npm install -g pnpm
 RUN pnpm install
-RUN pnpm swagger
-ENV PORT=3000
+ENV PORT=31300
 ENV DATABASE_URL=mongodb://root:mongo2023@localhost:27017
 
 ENV MERCADOPAGO_URL=https://api.mercadopago.com/123
@@ -16,5 +15,5 @@ ENV MERCADOPAGO_TOKEN=TEST-2
 ENV MERCADOPAGO_POS=SU
 ENV MERCADOPAGO_WEBHOOK_URL=http:/br
 
-EXPOSE 3000
+EXPOSE 31300
 CMD [ "pnpm", "start"]
