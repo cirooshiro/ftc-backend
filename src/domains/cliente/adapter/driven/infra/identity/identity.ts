@@ -8,7 +8,9 @@ export class Identity {
     app: admin.app.App;
 
     constructor() {
-        this.app = admin.apps[0] || admin.initializeApp()
+        this.app = admin.apps[0] || admin.initializeApp({
+            serviceAccountId: '197343799268-compute@developer.gserviceaccount.com',
+        })
     }
 
     getIdentity(): Auth {
