@@ -5,7 +5,9 @@
     "title": "Tech Challenge Fiap",
     "description": "Conjuntos dde recursos e operações do Tech Challenge da FIAP"
   },
-  "host": "backend-koxvlyfy2a-rj.a.run.app",
+  "host": [
+    "localhost:31300"
+  ],
   "basePath": "/",
   "tags": [
     {
@@ -26,7 +28,8 @@
     }
   ],
   "schemes": [
-    "https"
+    "https",
+    "http"
   ],
   "securityDefinitions": {
     "JWT": {
