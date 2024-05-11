@@ -2,10 +2,11 @@ import { ClienteVersao } from "./cliente.versao"
 
 export class Cliente {
 
-    constructor(cpf: string, nome: string, email: string, versao: ClienteVersao | null = null) {
+    constructor(cpf: string, nome: string, email: string, identity: string | null = null, versao: ClienteVersao | null = null) {
         this.nome = nome
         this.cpf = cpf  
         this.email = email
+        this.identity = identity
         this.versao = versao
     }
 
@@ -27,6 +28,14 @@ export class Cliente {
     private email: string
     public getEmail(): string {
         return this.email
+    }
+
+    private identity: string | null
+    public getIdentity(): string | null {
+        return this.identity
+    }
+    public setIdentity(uid: string | null) {
+        this.identity = uid
     }
 
     /**

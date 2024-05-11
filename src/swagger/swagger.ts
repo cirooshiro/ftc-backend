@@ -1,6 +1,7 @@
 import {
     post_cliente, 
     put_cliente,
+    post_cliente_autenticacao
 
 } from 'domains/cliente/adapter/driver/rest/swagger/acesso.swagger'
 
@@ -49,11 +50,20 @@ export const swagger = {
     definitions: {
         post_cliente,
         put_cliente,
+        post_cliente_autenticacao,
         post_produto,
         put_produto,
         post_pedido,
         post_webhook_pedido,
         put_pedido,
         post_webhook_mercadopago
-    }
+    },
+    securityDefinitions: {
+        JWT: {
+          type: 'apiKey',
+          in: 'header', 
+          name: 'Authorization', 
+          description: 'JWT Access Token - Incluir o Bearer'
+        }
+      }    
 }

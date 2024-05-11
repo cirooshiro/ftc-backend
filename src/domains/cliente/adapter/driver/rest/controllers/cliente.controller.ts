@@ -4,10 +4,11 @@ import { CustomError } from "domains/suporte/entities/custom.error";
 import { CustomResponse } from "domains/suporte/entities/custom.response";
 import { ClienteUseCases } from 'domains/cliente/core/applications/usecases/cliente.usecases';
 import { Cliente } from 'domains/cliente/core/entities/cliente';
-
 export class ClienteController {
 
-    constructor(private readonly service: ClienteUseCases) {}
+    constructor(
+        private readonly service: ClienteUseCases
+    ) {}
 
     async adiciona(request: Request, next: NextFunction): Promise<void> {
         try {
@@ -25,6 +26,7 @@ export class ClienteController {
         }
         
     }
+
     async atualiza(request: Request, next: NextFunction): Promise<void> {
         try {
             const result = validationResult(request)
@@ -56,5 +58,38 @@ export class ClienteController {
         } catch (err){
             next(new CustomError('Ops, algo deu errado na operação', 500, false, err))
         }        
-    }    
+    } 
+       
+    async autentica(request: Request, next: NextFunction): Promise<void> {
+        try {
+
+            const result = validationResult(request)
+
+            if (!result.isEmpty()) {
+                throw new CustomError('Parâmetros inválidos. Por favor, verifique as informações enviadas.', 400, false, result.array())
+            }
+        
+            const {email, cpf} = request.body            
+            next( new CustomResponse(200, 'sucesso', await this.service.autenticacao(email, cpf)))
+        } catch (err){
+            next(new CustomError('Ops, algo deu errado na operação', 401, false, err))
+        }        
+    }   
+    
+    async buscaAutenticado(request: Request, next: NextFunction): Promise<void> {
+        try {
+
+            const result = validationResult(request)
+
+            if (!result.isEmpty()) {
+                throw new CustomError('Parâmetros inválidos. Por favor, verifique as informações enviadas.', 400, false, result.array())
+            }
+
+            const token: string = (request.header('X-Forwarded-Authorization') || request.header('Authorization') || '') as string
+                    
+            next( new CustomResponse(200, 'Cliente encontrado', await this.service.buscaAutenticado(token)))
+        } catch (err){
+            next(new CustomError('Ops, algo deu errado na operação', 500, false, err))
+        }        
+    }
 }

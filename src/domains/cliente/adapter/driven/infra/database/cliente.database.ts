@@ -17,7 +17,8 @@ export class ClienteDatabase extends MongoDB implements ICliente {
         const result = await clienteRef.insertOne({
             cpf: cliente.getCpf(),
             nome: cliente.getNome(),
-            email: cliente.getEmail()
+            email: cliente.getEmail(),
+            identity: cliente.getIdentity()
         });
 
         return new ClienteVersao(result.insertedId.toString(), result.insertedId.getTimestamp())
@@ -54,6 +55,7 @@ export class ClienteDatabase extends MongoDB implements ICliente {
             data?.cpf,
             data?.nome,
             data?.email,
+            data?.identity,
             new ClienteVersao(
                 data?._id.toString(),
                 data?._id.getTimestamp()

@@ -1,0 +1,697 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Tech Challenge Fiap",
+    "description": "Conjuntos dde recursos e operações do Tech Challenge da FIAP"
+  },
+  "host": "localhost:31300",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Cliente",
+      "description": "APIs do domínio de Clientes"
+    },
+    {
+      "name": "Pedido",
+      "description": "APIs do domínio de Pedidos"
+    },
+    {
+      "name": "Produto",
+      "description": "APIs para gerenciamento de produtos"
+    },
+    {
+      "name": "Pagamento",
+      "description": "APIs do domínio de Pagamento"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "JWT": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "JWT Access Token - Incluir o Bearer"
+    }
+  },
+  "paths": {
+    "/api/health-check/v1": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/clientes/v1": {
+      "post": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Cria um novo cliente",
+        "description": "Cria um novo cliente a partir das informações básicas",
+        "operationId": "postcliente",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post_cliente"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Busca dos dados de um cliente autenticado",
+        "description": "Busca os dados de clientes autenticados",
+        "operationId": "getclienteautenticado",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/clientes/v1/{cpf}": {
+      "put": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Atualiza um novo cliente",
+        "description": "Atualiza os dados de um cliente pelo CPF",
+        "operationId": "postclientecpf",
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/put_cliente"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Busca um cliente pelo CPF",
+        "description": "Busca os dados de clientes pelo CPF",
+        "operationId": "getclientecpf",
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/clientes/v1/autenticacao": {
+      "post": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Autentica um usuário através do CPF e email",
+        "description": "Autentica um usuário através do CPF e email",
+        "operationId": "postclienteautenticacao",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post_cliente_autenticacao"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/pedidos/v1": {
+      "post": {
+        "tags": [
+          "Pedido"
+        ],
+        "summary": "Cria um novo pedido",
+        "description": "Cria um novo pedido",
+        "operationId": "postpedido",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post_pedido"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "Pedido"
+        ],
+        "summary": "lista todos os pedidos",
+        "description": "lista todos os pedidos",
+        "operationId": "getPedido",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/pedidos/v1/webhook": {
+      "post": {
+        "tags": [
+          "Pedido"
+        ],
+        "summary": "Informa uma evento para o pedido",
+        "description": "Informa um evento para o pedido",
+        "operationId": "postwebhookpedido",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post_webhook_pedido"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/pedidos/v1/{codigoPedido}": {
+      "put": {
+        "tags": [
+          "Pedido"
+        ],
+        "summary": "Atualiza um pedido",
+        "description": "Atualiza os dados de um pedido pelo codigo",
+        "operationId": "putpedido",
+        "parameters": [
+          {
+            "name": "codigoPedido",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/put_pedido"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/pedidos/v1/{codigoPedido}/status": {
+      "get": {
+        "tags": [
+          "Pedido"
+        ],
+        "summary": "consulta status do pedido",
+        "description": "Consulta o status do pedido",
+        "operationId": "putpedido",
+        "parameters": [
+          {
+            "name": "codigoPedido",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Pedido"
+        ],
+        "summary": "Atualiza um pedido",
+        "description": "Atualiza os dados de um pedido pelo codigo",
+        "operationId": "putpedido",
+        "parameters": [
+          {
+            "name": "codigoPedido",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/put_pedido_status"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/pedidos/v1/{codigoPedido}/checkout/pix": {
+      "put": {
+        "tags": [
+          "Pedido"
+        ],
+        "summary": "Faz o checkout de um pedido",
+        "description": "Faz o checkout de um pedido com a forma de pagamento PIX",
+        "operationId": "putpedido",
+        "parameters": [
+          {
+            "name": "codigoPedido",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/produtos/v1": {
+      "post": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Cria um novo produto",
+        "description": "Cria um novo produto a partir das informações básicas",
+        "operationId": "postproduto",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post_produto"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "busca produtos por categoria",
+        "description": "busca produtos por categoria",
+        "operationId": "getProduto",
+        "parameters": [
+          {
+            "name": "categoria",
+            "in": "query",
+            "description": "Categoria que o produto pertence",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/produtos/v1/{codigo}": {
+      "put": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Atualiza um produto",
+        "description": "Atualiza os dados de um produto pelo codigo",
+        "operationId": "postproduto",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/put_produto"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Produto"
+        ],
+        "summary": "Deleta um produto",
+        "description": "Deleta os dados de um produto pelo codigo",
+        "operationId": "deleteproduto",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/pagamentos/v1/webhook/mercadopago": {
+      "post": {
+        "tags": [
+          "Pagamento"
+        ],
+        "summary": "Recebe os eventos de pagamento do parceiro",
+        "description": "Recebe os eventos do parceiro e envia para o domínio de pedidos",
+        "operationId": "postWebhookMercadopago",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post_webhook_mercadopago"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "post_cliente": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Daniel CLmente"
+        },
+        "cpf": {
+          "type": "string",
+          "example": "37255731821"
+        },
+        "email": {
+          "type": "string",
+          "example": "dcleme17@gmail.com"
+        }
+      },
+      "required": [
+        "nome",
+        "cpf",
+        "email"
+      ]
+    },
+    "put_cliente": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Daniel CLmente"
+        },
+        "email": {
+          "type": "string",
+          "example": "dcleme17@gmail.com"
+        }
+      },
+      "required": [
+        "nome",
+        "email"
+      ]
+    },
+    "post_cliente_autenticacao": {
+      "type": "object",
+      "properties": {
+        "cpf": {
+          "type": "string",
+          "example": "37255731821"
+        },
+        "email": {
+          "type": "string",
+          "example": "dcleme17@gmail.com"
+        }
+      },
+      "required": [
+        "cpf",
+        "email"
+      ]
+    },
+    "post_produto": {
+      "type": "object",
+      "properties": {
+        "codigo": {
+          "type": "string",
+          "example": "000001"
+        },
+        "produto": {
+          "type": "string",
+          "example": "hamburger"
+        },
+        "categoria": {
+          "type": "string",
+          "example": "lanches"
+        },
+        "preco": {
+          "type": "number",
+          "example": 30.99
+        },
+        "descricao": {
+          "type": "string",
+          "example": "um delicioso hamburger feito com carne bovina"
+        }
+      },
+      "required": [
+        "codigo",
+        "produto",
+        "categoria",
+        "preco",
+        "descricao"
+      ]
+    },
+    "put_produto": {
+      "type": "object",
+      "properties": {
+        "produto": {
+          "type": "string",
+          "example": "beirute"
+        },
+        "categoria": {
+          "type": "string",
+          "example": "lanches"
+        },
+        "preco": {
+          "type": "number",
+          "example": 30.99
+        },
+        "descricao": {
+          "type": "string",
+          "example": "um delicioso beirute"
+        }
+      },
+      "required": [
+        "produto",
+        "categoria",
+        "preco",
+        "descricao"
+      ]
+    },
+    "post_pedido": {
+      "type": "object",
+      "properties": {
+        "cpf": {
+          "type": "string",
+          "example": "12345678910"
+        },
+        "itens": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "codigoProduto": {
+                "type": "string",
+                "example": "000001"
+              },
+              "quantidade": {
+                "type": "number",
+                "example": 1
+              },
+              "observacao": {
+                "type": "string",
+                "example": "Sem cebola"
+              }
+            },
+            "required": [
+              "codigoProduto",
+              "quantidade",
+              "observacao"
+            ]
+          }
+        }
+      },
+      "required": [
+        "cpf",
+        "itens"
+      ]
+    },
+    "post_webhook_pedido": {
+      "type": "object",
+      "properties": {
+        "codigoPedido": {
+          "type": "string",
+          "example": "20240303_000006"
+        },
+        "evento": {
+          "type": "string",
+          "example": "PAGO"
+        }
+      },
+      "required": [
+        "codigoPedido",
+        "evento"
+      ]
+    },
+    "put_pedido": {
+      "type": "object",
+      "properties": {
+        "cpf": {
+          "type": "string",
+          "example": "12345678910"
+        },
+        "itens": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "codigoProduto": {
+                "type": "string",
+                "example": "000001"
+              },
+              "quantidade": {
+                "type": "number",
+                "example": 1
+              },
+              "observacao": {
+                "type": "string",
+                "example": "Sem cebola"
+              }
+            },
+            "required": [
+              "codigoProduto",
+              "quantidade",
+              "observacao"
+            ]
+          }
+        }
+      },
+      "required": [
+        "cpf",
+        "itens"
+      ]
+    },
+    "post_webhook_mercadopago": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "example": "state_FINISHED"
+        },
+        "id": {
+          "type": "string",
+          "example": "123456"
+        }
+      },
+      "required": [
+        "action",
+        "id"
+      ]
+    }
+  }
+}

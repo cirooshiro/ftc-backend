@@ -2,11 +2,16 @@ import { Cliente } from "domains/cliente/core/entities/cliente";
 import { ClienteVersao } from "domains/cliente/core/entities/cliente.versao";
 import { ClienteDatabase } from "domains/cliente/adapter/driven/infra/database/cliente.database"
 import { CustomError } from "domains/suporte/entities/custom.error"
+import { Identity } from "domains/cliente/adapter/driven/infra/identity/identity";
 
 export class ClienteUseCases {
 
-    constructor(private readonly database: ClienteDatabase) {
+    constructor(
+        private readonly database: ClienteDatabase,
+        private readonly identity: Identity 
+    ) {
         this.database = database
+        this.identity = identity
     }
 
     async adiciona(cliente: Cliente): Promise<ClienteVersao> {
@@ -16,6 +21,10 @@ export class ClienteUseCases {
         if (ultimaVersao) {
             throw new CustomError('Já existe cliente para esse CPF', 400, false, [])
         }
+
+        const user = await this.identity.createUser(cliente)
+
+        cliente.setIdentity(user.uid)
 
         return await this.database.adiciona(cliente).then()
     }
@@ -46,4 +55,35 @@ export class ClienteUseCases {
             throw new CustomError('Cliente não encontrado com o CPF informado', 404, false, [])
         }
     }
+
+    async autenticacao(email: string, cpf: string): Promise<string> {
+
+        console.info(cpf)
+
+        const ultimaVersao: Cliente | null = await this.database.buscaUltimaVersao(cpf)
+
+        if (!ultimaVersao || email?.toLowerCase() !== ultimaVersao.getEmail().toLowerCase()) {
+            throw new CustomError('Cliente não encontrado com o CPF informado', 401, false, [])
+        }
+
+        return this.identity.createCustomToken(ultimaVersao, {
+            cpf,
+            nome: ultimaVersao.getNome(),
+            email,
+            versao: ultimaVersao.getVersao()?.versao,
+            dataCadastro: ultimaVersao.getVersao()?.dataCadastro,
+        })
+    }    
+
+    async buscaAutenticado(token: string): Promise<Cliente> {
+
+        const cliente: Cliente = await this.identity.verifyIdToken(token.replace('Bearer ', ''))
+
+        if (cliente) {
+            return cliente
+        } else {
+            throw new CustomError('Cliente não está autenticado', 404, false, [])
+        }
+    }
+
 }
