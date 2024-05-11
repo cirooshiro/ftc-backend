@@ -76,8 +76,12 @@ export class ClienteUseCases {
     }    
 
     async buscaAutenticado(token: string): Promise<Cliente> {
-
-        const cliente: Cliente = await this.identity.verifyIdToken(token.replace('Bearer ', ''))
+        let cliente: Cliente | null = null;
+        try {
+            cliente = await this.identity.verifyIdToken(token.replace('Bearer ', ''))
+        } catch (error) {
+            console.error(error)
+        }
 
         if (cliente) {
             return cliente
