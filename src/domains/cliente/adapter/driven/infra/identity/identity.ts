@@ -11,6 +11,9 @@ export class Identity {
     constructor() {
 
         try{
+
+            console.warn(process.env.SERVICE_ACCOUNT!)
+            
             this.serviceAccount = JSON.parse(process.env.SERVICE_ACCOUNT!)
 
             const cert = {
