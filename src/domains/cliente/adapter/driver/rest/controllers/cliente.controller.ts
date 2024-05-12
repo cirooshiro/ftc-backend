@@ -69,9 +69,11 @@ export class ClienteController {
                 throw new CustomError('Parâmetros inválidos. Por favor, verifique as informações enviadas.', 400, false, result.array())
             }
         
-            const {email, cpf} = request.body            
-            next( new CustomResponse(200, 'sucesso', await this.service.autenticacao(email, cpf)))
+            const {email, cpf} = request.body      
+            const response = await this.service.autenticacao(email, cpf)      
+            next( new CustomResponse(200, 'sucesso', response ))
         } catch (err){
+            console.error(err)
             next(new CustomError('Ops, algo deu errado na operação', 401, true, err))
         }        
     }   

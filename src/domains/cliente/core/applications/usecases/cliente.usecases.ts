@@ -58,14 +58,14 @@ export class ClienteUseCases {
 
     async autenticacao(email: string, cpf: string): Promise<string> {
 
-        console.info(cpf)
-
+        console.info('autenticacao')
         const ultimaVersao: Cliente | null = await this.database.buscaUltimaVersao(cpf)
 
         if (!ultimaVersao || email?.toLowerCase() !== ultimaVersao.getEmail().toLowerCase()) {
             throw new CustomError('Cliente não encontrado com o CPF informado', 401, false, [])
         }
 
+        console.info('vai criar o token')
         return this.identity.createCustomToken(ultimaVersao, {
             cpf,
             nome: ultimaVersao.getNome(),
