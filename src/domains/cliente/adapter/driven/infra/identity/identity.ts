@@ -12,7 +12,7 @@ export class Identity {
         
         this.app = admin.apps[0] || admin.initializeApp()
 
-        console.info('this.app.options.serviceAccountId', this.app.options.serviceAccountId)
+        console.info('this.app.options.serviceAccountId', this.app.options.credential)
     }
 
     getIdentity(): Auth {

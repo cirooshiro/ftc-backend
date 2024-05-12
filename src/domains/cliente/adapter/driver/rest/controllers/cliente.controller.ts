@@ -72,7 +72,7 @@ export class ClienteController {
             const {email, cpf} = request.body            
             next( new CustomResponse(200, 'sucesso', await this.service.autenticacao(email, cpf)))
         } catch (err){
-            next(new CustomError('Ops, algo deu errado na operação', 401, false, err))
+            next(new CustomError('Ops, algo deu errado na operação', 401, true, err))
         }        
     }   
     

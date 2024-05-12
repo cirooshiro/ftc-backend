@@ -7,7 +7,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=31300
-      - DATABASE_URL="mongodb+srv://fiaptcgrupo22:mongo2024@serverlessinstance0.25wwxch.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0"
+      - DATABASE_URL=mongodb+srv://fiaptcgrupo22:mongo2024@serverlessinstance0.25wwxch.mongodb.net/?retryWrites=true&w=majority&appName=ServerlessInstance0
       - MERCADOPAGO_URL=https://api.mercadopago.com/
       - MERCADOPAGO_USERID=84967632
       - MERCADOPAGO_TOKEN=TEST-2407420594039251-030222-bec9539a6ba5cae720b4f6d07ad3bd7a-84967632
