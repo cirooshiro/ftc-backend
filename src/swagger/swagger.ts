@@ -31,7 +31,7 @@ export const swagger = {
         title: 'Tech Challenge Fiap',              
         description: 'Conjuntos dde recursos e operações do Tech Challenge da FIAP'
     },
-    host: ["backend-koxvlyfy2a-rj.a.run.app"],
+    host: ["backend-2inpei1w.ue.gateway.dev"],
     // host: ["localhost:31300"],
     schemes: ["https", "http"],
     tags: [                   
